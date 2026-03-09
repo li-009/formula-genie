@@ -71,6 +71,7 @@ export async function POST(req: NextRequest) {
     let finalKey: string;
     let finalBaseUrl: string;
     let finalModel: string;
+    let freeRemaining = 0;
 
     if (useProxy) {
       const serverKey = process.env.LLM_API_KEY;
@@ -99,7 +100,7 @@ export async function POST(req: NextRequest) {
       finalModel = process.env.LLM_MODEL || "gpt-4o-mini";
 
       recordUsage(ip);
-      var freeRemaining = remaining - 1;
+      freeRemaining = remaining - 1;
     } else {
       finalKey = apiKey;
       finalBaseUrl = baseUrl || "https://api.openai.com/v1";
