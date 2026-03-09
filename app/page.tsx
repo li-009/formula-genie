@@ -327,7 +327,14 @@ export default function Home() {
             <textarea
               ref={inputRef}
               value={query}
-              onChange={(e) => setQuery(e.target.value)}
+              onChange={(e) => {
+                setQuery(e.target.value);
+                if (!e.target.value.trim()) {
+                  setFormula("");
+                  setExplanation("");
+                  setError("");
+                }
+              }}
               onKeyDown={handleKeyDown}
               placeholder='e.g. "Find the average salary where department is Engineering"'
               rows={3}
